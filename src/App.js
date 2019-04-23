@@ -1,25 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      weather:[]
+    }
+  }
+
+  componentDidMount(){
+    fetch("http://api.openweathermap.org/data/2.5/weather?id=7872756&appid=f04826057701fdaf14bbacf1ee8c24cb")
+      .then(response => response.json())
+      .then(response => {
+          const weather = response.weather[0].main;
+          console.log(weather[0].main)
+          this.setState({
+            weather: weather
+          })
+      })
+  }
+
+// componentDidMount() {
+//         fetch("https://api.imgflip.com/get_memes")
+//             .then(response => response.json())
+//             .then(response => {
+//                 const {memes} = response.data
+//                 this.setState({ allMemeImgs: memes })
+//             })
+//     }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>{this.state.weather}</h1>
       </div>
     );
   }
