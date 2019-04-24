@@ -4,11 +4,13 @@ class CityWeather extends Component {
     constructor(){
         super();
         this.state = {
-          weather:[],
+          weather:"",
           icon: "",
           city: "",
           tempMin: "",
-          tempMax: ""
+          tempMax: "",
+          tempMeasure: "C",
+          cityDisplay: []
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -33,7 +35,26 @@ class CityWeather extends Component {
     }
 
     handleClick(){
-        console.log("worked");
+        let newMinTemp, newMaxTemp;
+        if(this.state.tempMeasure === "C"){
+            newMinTemp = Math.round((this.state.tempMin * 9/5) + 32);
+            newMaxTemp = Math.round((this.state.tempMax * 9/5) + 32);
+            this.setState({
+                tempMin: newMinTemp,
+                tempMax: newMaxTemp,
+                tempMeasure: "F"
+            })
+            
+        }
+        else {
+            newMinTemp = Math.round((this.state.tempMin -32)* 5/9);
+            newMaxTemp = Math.round((this.state.tempMax -32) * 5/9);
+            this.setState({
+                tempMin: newMinTemp,
+                tempMax: newMaxTemp,
+                tempMeasure: "C"
+            })
+        }
     }
 
     render(){
@@ -42,9 +63,15 @@ class CityWeather extends Component {
                 <h1>{this.state.city}</h1>
                 <h2>{this.state.weather}</h2>
                 <img className="icon" src={this.state.icon} alt={this.state.weather}/>
-                <h3>Min: {this.state.tempMin}°C</h3><h3>Max: {this.state.tempMax}°C</h3>
+                <h3>Min: <br />{this.state.tempMin}°{this.state.tempMeasure}</h3>
+                <h3>Max: <br />{this.state.tempMax}°{this.state.tempMeasure}</h3>
                 <br />
-                <button onClick={this.handleClick}>Next City</button>
+                <button
+                    className="button"
+                    onClick={this.handleClick}
+                >
+                    Change to °{this.state.tempMeasure === "C" ? "F": "C"}
+                </button>
             </div> 
         )
     }
