@@ -29,12 +29,6 @@
 
 }
 
-
-
-.App {
-  text-align: center;
-}
-
 html {
   text-align: center;
 }
@@ -45,8 +39,19 @@ body {
   background-size: cover; 
 }
 
+nav {
+  width: 100%;
+  background-color: rgba(230,230,230,0.7);
+  font-size: 30px;
+  border: 2px solid rgb(33,105,146);
+}
+
+.App {
+  text-align: center;
+}
+
 .icon {
-  height: 60px;
+  height: 70px;
 }
 
 .container {

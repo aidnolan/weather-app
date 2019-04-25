@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import CityWeather from './CityWeather'
+import Navbar from './Navbar'
 
 class App extends Component {
   render() {
-    const today = new Date().toLocaleDateString("en-GB");
+    
     return (
       <div className="App">
-        <h1>Weather on {today}</h1>
+        <Navbar />
         <CityWeather id="5128638" />
         <CityWeather id="2643743" />
         <CityWeather id="3614789" />
